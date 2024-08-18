@@ -1,0 +1,149 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ folder }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <div id="container">
+    <ng-container [ngSwitch]="folder">
+      <div *ngSwitchCase="'login'">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Login</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <form (ngSubmit)="login()">
+              <ion-item>
+                <ion-label position="floating">Username</ion-label>
+                <ion-input [(ngModel)]="username" name="username" required></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-label position="floating">Password</ion-label>
+                <ion-input [(ngModel)]="password" name="password" type="password" required></ion-input>
+              </ion-item>
+              <ion-button expand="full" type="submit">Login</ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div *ngSwitchCase="'products'">
+        <div class="card-container">
+          <ng-container *ngFor="let card of cards">
+            <ion-card class="responsive-card">
+              <img [src]="card.img" [alt]="card.title" />
+              <ion-card-header>
+                <ion-card-title>{{ card.title }}</ion-card-title>
+                <ion-card-subtitle>{{ card.subtitle }}</ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content>
+                {{ card.content }}
+              </ion-card-content>
+            </ion-card>
+          </ng-container>
+        </div>
+      </div>
+      
+      <div *ngSwitchCase="'contact-us'">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Contact Us</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <div *ngIf="mapImage">
+              <p>Map Tile:</p>
+              <img [src]="mapImage" alt="Map Tile" />
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div *ngSwitchCase="'about-us'" class="about-us-container">
+        <ion-card class="about-us-card">
+          <ion-card-header>
+            <ion-card-title>About Us</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p class="intro">
+              We are a passionate team of software developers committed to delivering innovative and high-quality software solutions. With a focus on cutting-edge technology, we strive to transform ideas into reality.
+            </p>
+            <div class="mission-vision">
+              <div class="mission">
+                <h3>Our Mission</h3>
+                <p>To craft software that drives efficiency, fosters innovation, and brings value to our clients.</p>
+              </div>
+              <div class="vision">
+                <h3>Our Vision</h3>
+                <p>To be a leading software development firm recognized globally for our commitment to excellence and customer satisfaction.</p>
+              </div>
+            </div>
+            <div class="team">
+              <h3>Our Team</h3>
+              <p>Our team is composed of highly skilled developers, designers, and project managers, all dedicated to ensuring the success of our clients' projects.</p>
+            </div>
+            <div class="values">
+              <h3>Our Values</h3>
+              <ul>
+                <li>Innovation</li>
+                <li>Integrity</li>
+                <li>Customer-centricity</li>
+                <li>Excellence</li>
+              </ul>
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div *ngSwitchCase="'contact-us'">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Contact Us</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>We'd love to hear from you! Feel free to reach out to us with any questions or comments.</p>
+            <ion-item>
+              <ion-label position="floating">Your Name</ion-label>
+              <ion-input></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Your Email</ion-label>
+              <ion-input type="email"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="floating">Message</ion-label>
+              <ion-textarea></ion-textarea>
+            </ion-item>
+            <ion-button expand="full">Send Message</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div *ngSwitchCase="'home'">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title>Welcome to Our Website</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>We are a leading software development company, committed to providing innovative solutions. Explore our site to learn more about what we offer.</p>
+            <ion-button expand="full">Learn More About Us</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      
+      
+      
+      <div *ngSwitchDefault>
+        <strong class="capitalize">{{ folder }}</strong>
+        <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+      </div>
+    </ng-container>
+  </div>
+</ion-content>
+
+
